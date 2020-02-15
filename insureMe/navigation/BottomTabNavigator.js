@@ -21,7 +21,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Home"
         component={HomeScreen}
         options={{
-          title: 'Get Started',
+          title: 'Home',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
         }}
       />
@@ -29,7 +29,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Preferences"
         component={PreferencesScreen}
         options={{
-          title: 'Your Preferences',
+          title: 'Preferences',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
         }}
       />
@@ -37,7 +37,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Activities"
         component={ActivitiesScreen}
         options={{
-          title: 'Select Your Activities',
+          title: 'Activities',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
         }}
       />
@@ -45,7 +45,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Insurance"
         component={InsuranceScreen}
         options={{
-          title: 'Your Insurance Options',
+          title: 'Insurance',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
         }}
       />
