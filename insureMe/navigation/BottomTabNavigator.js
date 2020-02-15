@@ -2,7 +2,9 @@ import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import PreferencesScreen from '../screens/PreferencesScreen';
+import ActivitiesScreen from '../screens/ActivitiesScreen';
+import InsuranceScreen from '../screens/InsuranceScreen';
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -24,10 +26,26 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="Links"
-        component={LinksScreen}
+        name="Preferences"
+        component={PreferencesScreen}
         options={{
-          title: 'Resources',
+          title: 'Your Preferences',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Activities"
+        component={ActivitiesScreen}
+        options={{
+          title: 'Select Your Activities',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Insurance"
+        component={InsuranceScreen}
+        options={{
+          title: 'Your Insurance Options',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
         }}
       />
@@ -41,7 +59,11 @@ function getHeaderTitle(route) {
   switch (routeName) {
     case 'Home':
       return 'How to get started';
-    case 'Links':
-      return 'Links to learn more';
+    case 'Preferences':
+      return 'Please enter your preferences';
+    case 'Activities':
+      return 'Please select your activities';
+    case 'Insurance':
+      return 'Here are your insurance options';
   }
 }
