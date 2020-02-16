@@ -1,23 +1,66 @@
-import * as React from 'react';
+import React, { useGlobal, useEffect, setGlobal, useRef } from 'reactn';
 import { SafeAreaView, Platform, StyleSheet, Text, View, Button } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import 'react-native-gesture-handler';
 import { Card } from '../components/Activities/Card'
 import Swiper from 'react-native-deck-swiper';
 import { Pics } from '../components/Activities/ActivityPictures';
 
 
+const API_TOKEN = 'wUXAB9kcSADMKU8Doj5VskGMwJsl'
+
+const locationToCoordinates = {
+    'London': [41.397158, 2.160873],
+    'New York': [40.7128, 74.0060],
+    'Paris': [48.8566, 2.3522],
+    'San Francisco': [37.7749, 122.4194],
+    'Dallas': [32.7767, 96.7970],
+    'Berlin': [52.5200, 13.4050],
+    'Barcelona': [41.3851, 2.1734]
+}
+
 export default function ActivitiesScreen({navigation}) {
-    return (
-      <SafeAreaView style={styles.container}>
-      <Swiper
-        cards={Pics}
-        renderCard={Card}
-        infinite // keep looping cards infinitely
-        backgroundColor="white"
-        cardHorizontalMargin={0}
-        stackSize={2} // number of cards shown in background
-      />
-    </SafeAreaView>
+    const [location, setLocation] = useGlobal('location');
+    const [pointsOfInterest, setPointsOfInterest] = useGlobal('pointsOfInterest');
+
+    const [latitude, longitude] = locationToCoordinates[location]
+
+    console.log(pointsOfInterest)
+
+    useEffect((latitude, longitude) => {
+        fetch(
+            `https://test.api.amadeus.com/v1/reference-data/locations/pois?latitude=${latitude}&longitude=${longitude}&radius=2
+            `,
+            {
+              method: "GET",
+              headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: "Bearer " + API_TOKEN
+              })
+            }
+          )
+            .then(res => res.json())
+            .then(response =>
+              setPointsOfInterest(response.items)
+            )
+            .catch(error => console.log("NOOO" + error));
+    }, [])
+
+  return (
+      <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+            <Swiper
+                cards={Pics}
+                renderCard={Card}
+                infinite // keep looping cards infinitely
+                backgroundColor="white"
+                cardHorizontalMargin={0}
+                stackSize={2} // number of cards shown in background
+            />
+        </SafeAreaView>
+      </View>
+
     );
 }
 

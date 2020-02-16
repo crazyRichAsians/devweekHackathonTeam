@@ -1,36 +1,42 @@
-import * as React from 'react';
-import { Platform, StyleSheet, Text, View, Button } from 'react-native';
+import React, { useGlobal } from 'reactn';
+import { Platform, StyleSheet, Text, View, Button, Picker } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import 'react-native-gesture-handler';
 
 import { MonoText } from '../components/StyledText';
 
 export default function HomeScreen({navigation}) {
+  const [location, setLocation] = useGlobal('location');
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 
         <View style={styles.getStartedContainer}>
 
-          <Text style={styles.getStartedText}>Click here to access the Preferences screen:</Text>
-          <Button title="Preferences" onPress={() => navigation.navigate('Preferences')}/>
+        <Text style={styles.getStartedText}>Hi there!{'\n'} Please select your desired travel location:</Text>
 
-          <Text style={styles.getStartedText}>Click here to access the Activities screen:</Text>
-          <Button title="Activities" onPress={() => navigation.navigate('Activities')}/>
+        <Picker
+            selectedValue={location}
+            style={{height: 50, width: 150}}
+            onValueChange={(itemValue, itemIndex) =>
+              setLocation(itemValue)
+            }
+            prompt="Select your desired coverage">
+            <Picker.Item label="London" value="London" />
+            <Picker.Item label="New York" value="New York" />
+            <Picker.Item label="Paris" value="Paris" />
+            <Picker.Item label="San Francisco" value="San Francisco" />
+            <Picker.Item label="Dallas" value="Dallas" />
+            <Picker.Item label="Berlin" value="Berlin" />
+            <Picker.Item label="Barcelona" value="Barcelona" />
+        </Picker>
 
-          <Text style={styles.getStartedText}>Click here to access the Insurance screen:</Text>
-          <Button title="Insurance" onPress={() => navigation.navigate('Insurance')}/>
+
+        <Button title="Submit" onPress={() => navigation.navigate('Preferences')}/>
+
         </View>
 
       </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-
-        <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
-        </View>
-
-      </View>
     </View>
   );
 }

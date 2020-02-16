@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { setGlobal } from 'reactn';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { SplashScreen } from 'expo';
 import * as Font from 'expo-font';
@@ -10,6 +10,12 @@ import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
 
 const Stack = createStackNavigator();
+
+setGlobal({
+  location: 'London',
+  insuranceBand: 'Medium',
+  pointsOfInterest: []
+});
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
