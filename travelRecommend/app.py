@@ -31,7 +31,7 @@ def response():
     except Exception as e:
         print("Input json:", input_json)
         print(e)
-        return "Error in input shape!"
+        return "asdsaError in input shape!"
 
 if __name__ == '__main__':
     app.run(host = "0.0.0.0")
