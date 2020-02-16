@@ -20,7 +20,6 @@ const locationToCoordinates = {
 }
 
 export default function ActivitiesScreen({navigation}) {
-<<<<<<< HEAD
     const [location, setLocation] = useGlobal('location');
     const [pointsOfInterest, setPointsOfInterest] = useGlobal('pointsOfInterest');
 
