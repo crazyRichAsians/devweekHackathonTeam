@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useGlobal, useEffect, setGlobal, useRef } from 'reactn';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import 'react-native-gesture-handler';
@@ -7,19 +7,50 @@ import InsuranceCard from '../components/Insurance/InsuranceCards'
 
 import { MonoText } from '../components/StyledText';
 
+const API_TOKEN = 'wUXAB9kcSADMKU8Doj5VskGMwJsl'
+
+const locationToCoordinates = {
+    'London': [41.397158, 2.160873],
+    'New York': [40.7128, 74.0060],
+    'Paris': [48.8566, 2.3522],
+    'San Francisco': [37.7749, 122.4194],
+    'Dallas': [32.7767, 96.7970],
+    'Berlin': [52.5200, 13.4050],
+    'Barcelona': [41.3851, 2.1734]
+}
+
 export default function ActivitiesScreen({navigation}) {
+    const [location, setLocation] = useGlobal('location');
+    const [pointsOfInterest, setPointsOfInterest] = useGlobal('pointsOfInterest');
+
+    const [latitude, longitude] = locationToCoordinates[location]
+
+    console.log(pointsOfInterest)
+
+    useEffect((latitude, longitude) => {
+        fetch(
+            `https://test.api.amadeus.com/v1/reference-data/locations/pois?latitude=${latitude}&longitude=${longitude}&radius=2
+            `,
+            {
+              method: "GET",
+              headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: "Bearer " + API_TOKEN
+              })
+            }
+          )
+            .then(res => res.json())
+            .then(response =>
+              setPointsOfInterest(response.items)
+            )
+            .catch(error => console.log("NOOO" + error));
+    }, [])
+
   return (
       <View style={styles.container}>
         <View style={styles.cardBox}>
             <InsuranceCard alignSelf= "center"></InsuranceCard>
-        </View>
-  
-        <View style={styles.tabBarInfoContainer}>
-  
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
-          </View>
-  
         </View>
       </View>
     );
