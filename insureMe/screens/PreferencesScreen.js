@@ -1,36 +1,85 @@
-import * as React from 'react';
-import { Platform, StyleSheet, Text, View, Button } from 'react-native';
+import React, { useState } from 'react';
+import { Platform, StyleSheet, Text, View, Button, Picker } from 'react-native';
+import Table from 'react-native-simple-table';
 import { ScrollView } from 'react-native-gesture-handler';
 import 'react-native-gesture-handler';
 
 import { MonoText } from '../components/StyledText';
 
 export default function PreferencesScreen({navigation}) {
+  const [insuranceBandChoice, setInsuranceBandChoice] = useState('Medium')
+  const columns = [
+    {
+      title: 'Band',
+      dataIndex: 'band',
+      width: 105
+    },
+    {
+      title: 'Coverage (US$)',
+      dataIndex: 'coverage',
+      width: 140
+    }
+  ];
+
+  function generateTable() {
+    return [
+      {
+        'band': 'Low',
+        'coverage': '100-399',
+      },
+      {
+        'band': 'Medium',
+        'coverage': '400-699',
+      },
+      {
+        'band': 'High',
+        'coverage': '699-899',
+      }
+    ]
+  }
+
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <ScrollView style={styles.container} contentContainerStyle={styles.welcomeContainer}>
 
         <View style={styles.getStartedContainer}>
+          <Text> 
+            Hi there! In this page, we'd like to collect more information about your insurance budget and other related preferences.
+          </Text>
+          <br />
+          <Text>
+            This is what the insurance coverage ranges are like for your selected location:
+          </Text>
+          <br />
 
-          <Text style={styles.getStartedText}>Click here to access the Preferences screen:</Text>
-          <Button title="Preferences" onPress={() => navigation.navigate('Preferences')}/>
+        </View>
 
-          <Text style={styles.getStartedText}>Click here to access the Activities screen:</Text>
-          <Button title="Activities" onPress={() => navigation.navigate('Activities')}/>
+        <View style={styles.getStartedContainer}>
+          
+          <Table height={200} columnWidth={60} columns={columns} dataSource={generateTable()} />
 
-          <Text style={styles.getStartedText}>Click here to access the Insurance screen:</Text>
-          <Button title="Insurance" onPress={() => navigation.navigate('Insurance')}/>
+          <Text>Select your preference:</Text>
+          <br />
+
+          <Picker
+            selectedValue={insuranceBandChoice}
+            style={{height: 40, width: 100}}
+            onValueChange={(itemValue, itemIndex) =>
+              setInsuranceBandChoice(itemValue)
+            }
+            prompt="Select your desired coverage">
+            <Picker.Item label="Low" value="low" />
+            <Picker.Item label="Medium" value="medium" />
+            <Picker.Item label="High" value="high" />
+          </Picker>
+          <br />
+
+          <Button title="Activities ->" onPress={() => navigation.navigate('Activities')}/>
+
         </View>
 
       </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-
-        <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
-        </View>
-
-      </View>
+      
     </View>
   );
 }
@@ -48,12 +97,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   contentContainer: {
-    paddingTop: 30,
+    paddingTop: 10,
   },
   welcomeContainer: {
     alignItems: 'center',
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   welcomeImage: {
     width: 100,
