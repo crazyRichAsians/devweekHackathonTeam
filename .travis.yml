@@ -3,4 +3,4 @@ node_js:
   - "node"
 cache: npm
 script:
-  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then npm appr; fi'
+  - npm run test
