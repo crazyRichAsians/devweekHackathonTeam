@@ -2,16 +2,18 @@ import * as React from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import 'react-native-gesture-handler';
+import InsuranceCards from '../components/Insurance/InsuranceCards'
+import InsuranceCard from '../components/Insurance/InsuranceCards'
 
 import { MonoText } from '../components/StyledText';
 
 export default function ActivitiesScreen({navigation}) {
-    return (
+  return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+
+        {/* <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
   
           <View style={styles.getStartedContainer}>
-  
             <Text style={styles.getStartedText}>Click here to access the Preferences screen:</Text>
             <Button title="Preferences" onPress={() => navigation.navigate('Preferences')}/>
   
@@ -20,9 +22,15 @@ export default function ActivitiesScreen({navigation}) {
   
             <Text style={styles.getStartedText}>Click here to access the Insurance screen:</Text>
             <Button title="Insurance" onPress={() => navigation.navigate('Insurance')}/>
+            <InsuranceCards></InsuranceCards>
+            <Cards></Cards>
           </View>
+          
   
-        </ScrollView>
+        </ScrollView> */}
+        <View style={styles.cardBox}>
+            <InsuranceCard alignSelf= "center"></InsuranceCard>
+        </View>
   
         <View style={styles.tabBarInfoContainer}>
   
@@ -39,6 +47,11 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
+      margin: 20,
+    },
+    cardBox: {
+      flex: 0.8,
+
     },
     developmentModeText: {
       marginBottom: 20,
