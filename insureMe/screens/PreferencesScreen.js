@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useGlobal } from 'reactn';
 import { Platform, StyleSheet, Text, View, Button, Picker } from 'react-native';
 import Table from 'react-native-simple-table';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -7,7 +7,8 @@ import 'react-native-gesture-handler';
 import { MonoText } from '../components/StyledText';
 
 export default function PreferencesScreen({navigation}) {
-  const [insuranceBandChoice, setInsuranceBandChoice] = useState('Medium')
+  const [insuranceBandChoice, setInsuranceBandChoice] = useGlobal('insuranceBand')
+  const [location, setLocation] = useGlobal('location');
   const columns = [
     {
       title: 'Band',
@@ -44,10 +45,10 @@ export default function PreferencesScreen({navigation}) {
 
         <View style={styles.getStartedContainer}>
           <Text> 
-            Hi there! In this page, we'd like to collect more information about your insurance budget and other related preferences.
+            Hi there! In this page, we'd like to collect more information about your insurance budget and other related preferences.{'\n'}
           </Text>
           <Text>
-            This is what the insurance coverage ranges are like for your selected location:
+            This is what the insurance coverage ranges are like for your selected location: {location}{'\n'}
           </Text>
 
         </View>
@@ -56,11 +57,11 @@ export default function PreferencesScreen({navigation}) {
           
           <Table height={200} columnWidth={60} columns={columns} dataSource={generateTable()} />
 
-          <Text>Select your preference:</Text>
+          <Text>Select your preference:{'\n'}</Text>
 
           <Picker
             selectedValue={insuranceBandChoice}
-            style={{height: 40, width: 100}}
+            style={{height: 30, width: 100}}
             onValueChange={(itemValue, itemIndex) =>
               setInsuranceBandChoice(itemValue)
             }
