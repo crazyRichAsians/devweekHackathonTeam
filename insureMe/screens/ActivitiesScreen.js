@@ -10,24 +10,6 @@ import { MonoText } from '../components/StyledText';
 export default function ActivitiesScreen({navigation}) {
   return (
       <View style={styles.container}>
-
-        {/* <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-  
-          <View style={styles.getStartedContainer}>
-            <Text style={styles.getStartedText}>Click here to access the Preferences screen:</Text>
-            <Button title="Preferences" onPress={() => navigation.navigate('Preferences')}/>
-  
-            <Text style={styles.getStartedText}>Click here to access the Activities screen:</Text>
-            <Button title="Activities" onPress={() => navigation.navigate('Activities')}/>
-  
-            <Text style={styles.getStartedText}>Click here to access the Insurance screen:</Text>
-            <Button title="Insurance" onPress={() => navigation.navigate('Insurance')}/>
-            <InsuranceCards></InsuranceCards>
-            <Cards></Cards>
-          </View>
-          
-  
-        </ScrollView> */}
         <View style={styles.cardBox}>
             <InsuranceCard alignSelf= "center"></InsuranceCard>
         </View>
@@ -46,12 +28,12 @@ export default function ActivitiesScreen({navigation}) {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
-      margin: 20,
+      // backgroundColor: '#fff',
+      marginHorizontal: 20,
+      marginTop: 40
     },
     cardBox: {
       flex: 0.8,
-
     },
     developmentModeText: {
       marginBottom: 20,
