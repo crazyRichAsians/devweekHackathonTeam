@@ -46,11 +46,9 @@ export default function PreferencesScreen({navigation}) {
           <Text> 
             Hi there! In this page, we'd like to collect more information about your insurance budget and other related preferences.
           </Text>
-          <br />
           <Text>
             This is what the insurance coverage ranges are like for your selected location:
           </Text>
-          <br />
 
         </View>
 
@@ -59,7 +57,6 @@ export default function PreferencesScreen({navigation}) {
           <Table height={200} columnWidth={60} columns={columns} dataSource={generateTable()} />
 
           <Text>Select your preference:</Text>
-          <br />
 
           <Picker
             selectedValue={insuranceBandChoice}
@@ -72,7 +69,6 @@ export default function PreferencesScreen({navigation}) {
             <Picker.Item label="Medium" value="medium" />
             <Picker.Item label="High" value="high" />
           </Picker>
-          <br />
 
           <Button title="Activities ->" onPress={() => navigation.navigate('Activities')}/>
 
