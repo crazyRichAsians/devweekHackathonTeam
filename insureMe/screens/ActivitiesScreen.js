@@ -1,39 +1,30 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Text, View, Button } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { SafeAreaView, Platform, StyleSheet, Text, View, Button } from 'react-native';
 import 'react-native-gesture-handler';
-import InsuranceCards from '../components/Insurance/InsuranceCards'
-import InsuranceCard from '../components/Insurance/InsuranceCards'
+import { Card } from '../components/Activities/Card'
+import Swiper from 'react-native-deck-swiper';
+import { Pics } from '../components/Activities/ActivityPictures';
 
-import { MonoText } from '../components/StyledText';
 
 export default function ActivitiesScreen({navigation}) {
-  return (
-      <View style={styles.container}>
-        <View style={styles.cardBox}>
-            <InsuranceCard alignSelf= "center"></InsuranceCard>
-        </View>
-  
-        <View style={styles.tabBarInfoContainer}>
-  
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
-          </View>
-  
-        </View>
-      </View>
+    return (
+      <SafeAreaView style={styles.container}>
+      <Swiper
+        cards={Pics}
+        renderCard={Card}
+        infinite // keep looping cards infinitely
+        backgroundColor="white"
+        cardHorizontalMargin={0}
+        stackSize={2} // number of cards shown in background
+      />
+    </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      // backgroundColor: '#fff',
-      marginHorizontal: 20,
-      marginTop: 40
-    },
-    cardBox: {
-      flex: 0.8,
+      backgroundColor: '#fff',
     },
     developmentModeText: {
       marginBottom: 20,
