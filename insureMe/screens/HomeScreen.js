@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
+import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import * as WebBrowser from 'expo-web-browser';
 import 'react-native-gesture-handler';
-import {NavigationContainer} from '@react-navigation/native';
 
 import { MonoText } from '../components/StyledText';
 
